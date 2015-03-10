@@ -7,8 +7,8 @@ function registerPushwooshAndroid() {
 	document.addEventListener('push-notification', function(event) {
 	            var title = event.notification.title;
 	            var userData = event.notification.userdata;
-	            var header = event.notification.header;
-	            console.warn('header: ' + header + 'title: ' + title);
+	            //var header = event.notification.header;
+	           // console.warn('header: ' + header + 'title: ' + title);
 	            
 	            //dump custom data to the console if it exists
 	            if(typeof(userData) != "undefined") {
@@ -20,8 +20,11 @@ function registerPushwooshAndroid() {
 
 			  });
 
+	console.warn('onDeviceReady');
+	pushNotification.onDeviceReady({ projectid: "387050748417", appid : "A0443-C41F6" });
+	
 	//projectid: "GOOGLE_PROJECT_ID", appid : "PUSHWOOSH_APP_ID"
-	pushNotification.registerDevice({ projectid: "387050748417", appid : "A0443-C41F6" },
+	pushNotification.registerDevice(
 									function(token) {
 										alert(token);
 										//callback when pushwoosh is ready
@@ -56,10 +59,11 @@ function onPushwooshAndroidInitialized(pushToken)
 }
 
 function initPushwoosh() {
+	console.warn('initPushwoosh');
 	var pushNotification = window.plugins.pushNotification;
 	
+	console.warn('registerPushwooshAndroid');
 	registerPushwooshAndroid();
-	pushNotification.onDeviceReady();
 }
 
  
